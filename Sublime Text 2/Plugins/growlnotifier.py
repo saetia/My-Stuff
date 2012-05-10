@@ -1,5 +1,5 @@
 # Description:
-# Displays growl message when saving
+# Plays sound when saving
 # Requirements:
 # * Sublime Text 2
 # * growlnotify (http://growl.info/extras.php), installed in /usr/local/bin/
@@ -11,10 +11,9 @@ import subprocess, sublime, sublime_plugin, os
 
 class GrowlNotifier(sublime_plugin.EventListener):
 
-	def growl(self, msg):
-		cmd = '/usr/local/bin/growlnotify -a "Sublime Text 2" -t "Saved!" -m "'+msg+'"'
+	def growl(self):
+		cmd = 'osascript -e beep'
 		subprocess.call(cmd,shell=True)
 
 	def on_post_save(self, view):
-		filename=os.path.basename(view.file_name())
-		self.growl(filename)
+		self.growl()
